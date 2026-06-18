@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,9 +18,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::create([
+            'name' => 'Admin Ritel',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'), // Mengamankan password
+            'role' => 'admin',
+        ]);
+
+        // 2. Membuat Akun User biasa otomatis
+        User::create([
+            'name' => 'User Biasa',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
         ]);
     }
 }

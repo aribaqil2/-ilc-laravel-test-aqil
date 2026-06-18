@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class CheckRole
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  Closure(Request): (Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        //untuk mengecek apakah user yang login memiliki role admin atau bukan
+        if ($request->user() && $request->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return $next($request);
+    }
+}
